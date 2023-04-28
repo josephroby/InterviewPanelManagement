@@ -1,0 +1,33 @@
+<div class="container">
+    <h1>Tech Panel Listing</h1>
+    <div class="filters">
+        <label for="filterName">Filter by Name:</label>
+        <input type="text" id="filterName" [(ngModel)]="filterName">
+        <label for="filterPosition">Filter by Position:</label>
+        <input type="text" id="filterPosition" [(ngModel)]="filterPosition">
+    </div>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>EmployeeId</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Position</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="hover" (click)="redirect(member)"
+                 *ngFor="let member of filteredMembers | paginate: { itemsPerPage: 10, currentPage: currentPage, totalItems: totalMembers }">
+                    <td>{{member.employeeId}}</td>
+                    <td>{{member.name}}</td>
+                    <td>{{ member.email }}</td>
+                    <td>{{ member.position }}</td>
+                  </tr>
+                  
+            </tbody>
+            <button type="button" (click)="fileDownload()">Download</button>
+        </table>
+        <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+    </div>
+</div>
